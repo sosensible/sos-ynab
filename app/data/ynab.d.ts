@@ -315,7 +315,7 @@ interface UpdateTransactionsResponse {
 }
 
 export interface Transaction {
-  id: string;
+  id?: string;
   date: string;
   amount: number;
   memo: string | null;
@@ -323,13 +323,15 @@ export interface Transaction {
   approved: boolean;
   flag_color: string | null;
   account_id: string;
-  payee_id: string | null;
-  category_id: string | null;
-  transfer_account_id: string | null;
-  transfer_transaction_id: string | null;
-  matched_transaction_id: string | null;
-  import_id: string | null;
-  deleted: boolean;
+  payee_id?: string | null;
+  payee_name?: string | null;
+  category_id?: string | null;
+  category_name?: string | null;
+  transfer_account_id?: string | null;
+  transfer_transaction_id?: string | null;
+  matched_transaction_id?: string | null;
+  import_id?: string | null;
+  deleted?: boolean;
 }
 
 interface UserResponse {

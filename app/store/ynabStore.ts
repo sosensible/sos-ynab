@@ -14,6 +14,7 @@ import {
 
 const usePrivateYNAB = defineStore('ynab-private', () => {
   // state & other attributes
+  const API = ref<ynab.API | null>(null)
   const accessToken = ref<string | null>(null)
   const authenticationActive = ref<boolean>(false)
   let timer: ReturnType<typeof setTimeout> | null = null
@@ -35,7 +36,10 @@ const usePrivateYNAB = defineStore('ynab-private', () => {
 
   const getAPI = () => {
     if (accessToken.value) {
-      return new ynab.API(accessToken.value)
+      if(!API.value) {
+        API.value = new ynab.API(accessToken.value)
+      }
+      return API.value
     } else {
       throw new Error('Access token is not set')
     }
@@ -91,6 +95,10 @@ export const useYnabStore = defineStore('ynab', () => {
   })
 
   // actions
+  const clearBudget = () => {
+    budget.value = null
+  }
+
   const clearBudgets = () => {
     budgets.value = []
   }
@@ -100,6 +108,10 @@ export const useYnabStore = defineStore('ynab', () => {
   })
 
   /* todo: add lastKnowledgeOfServer to the following functions */
+  const getAPI = () => {
+    return _YNAB.getAPI()
+  }
+
   const getAccounts = async (budgetId: string): Promise<Account> => {
     const api = _YNAB.getAPI()
     const response: AccountResponse = await api.accounts.getAccounts(budgetId)
@@ -331,9 +343,11 @@ export const useYnabStore = defineStore('ynab', () => {
     budgets,
     expiresAt,
     tokenType,
+    getAPI,
     createAccount,
     getAccounts,
     getAccountById,
+    clearBudget,
     clearBudgets,
     getBudget,
     getBudgets,

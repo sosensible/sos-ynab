@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { useYnabStore } from '~/store/ynab';
+import { useYnabStore } from '../../../store/ynabStore';
 
 const ynabStore = useYnabStore();
 const route = useRoute();
@@ -18,6 +18,7 @@ onMounted(() => {
     until.setSeconds(until.getSeconds() + Number(query.value.expires_in || 0));
     ynabStore.setExpiresAt(query.value.expires_in);
     ynabStore.setAccessToken(query.value.access_token || '');
+    ynabStore.clearBudget();
   } catch (error) {
     console.error('Error parsing YNAB OAuth response:', error);
   }
