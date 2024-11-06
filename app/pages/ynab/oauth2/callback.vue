@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { useYnabStore } from '../../../store/ynabStore';
+import { useYnabStore } from '../../../stores/ynabStore';
 
 const ynabStore = useYnabStore();
 const route = useRoute();

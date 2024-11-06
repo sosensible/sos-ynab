@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as ynab from 'ynab';
-import { useYnabStore } from '../../store/ynabStore';
+import { useYnabStore } from '../../stores/ynabStore';
 
 const ynabStore = useYnabStore();
 const withGoals = ref(false);

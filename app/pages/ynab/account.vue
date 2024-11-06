@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as ynab from '../../data/ynab';
-import { useYnabStore } from '../../store/ynabStore';
+import { useYnabStore } from '../../stores/ynabStore';
 
 // general state & declarations
 const ynabStore = useYnabStore();

@@ -1,8 +1,9 @@
+<!-- schedule.vue -->
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useCalendar } from '@/composables/useCalendar'
+import { useCalendarStore } from '@/stores/useCalendarStore'
 
-const { availableSlots, busyTimes, isLoading, fetchCalendar } = useCalendar()
+const store = useCalendarStore()
 const selectedSlot = ref(null)
 
 const selectSlot = (slot) => {
@@ -12,7 +13,7 @@ const selectSlot = (slot) => {
 }
 
 onMounted(() => {
-  fetchCalendar()
+  store.fetchCalendar()
 })
 </script>
 
@@ -21,10 +22,10 @@ onMounted(() => {
     <h1>Scheduling</h1>
     <h2>Available Appointment Slots</h2>
 
-    <div v-if="isLoading">Loading calendar...</div>
+    <div v-if="store.isLoading">Loading calendar...</div>
 
     <div v-else class="grid gap-4">
-      <div v-for="slot in availableSlots" :key="slot.start.toISOString()" @click="selectSlot(slot)" :class="[
+      <div v-for="slot in store.availableSlots" :key="slot.start.toISOString()" @click="selectSlot(slot)" :class="[
         'p-4 border rounded transition-colors',
         slot.isAvailable
           ? [
@@ -37,11 +38,5 @@ onMounted(() => {
         {{ slot.start.toLocaleTimeString() }} - {{ slot.end.toLocaleTimeString() }}
       </div>
     </div>
-
-    {{ selectedSlot }}
-
-    <iframe class="mt-8"
-      src="https://calendar.google.com/calendar/embed?src=c_304760a7ea57e4264275aa9825efcaea17b01c5171990b43010deb0c538c0667%40group.calendar.google.com&ctz=America%2FNew_York"
-      style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
   </div>
 </template>
