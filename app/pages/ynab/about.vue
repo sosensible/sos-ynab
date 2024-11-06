@@ -33,6 +33,9 @@ import { NuxtLink } from '../../../../../.nuxt/components';
           <NuxtLink to="/ynab/paycheckPlanner">Paycheck Planner</NuxtLink>
         </li>
         <li>
+          <NuxtLink to="/ynab/schedule">Schedule Coaching</NuxtLink>
+        </li>
+        <li>
           <NuxtLink to="/ynab/reconcileAssistant">Reconcile Assistant</NuxtLink>
         </li>
       </ul>
